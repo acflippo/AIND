@@ -107,10 +107,6 @@ class SelectorBIC(ModelSelector):
 
         return best_model
 
-    # def number_of_hmm_parameters(self, n_components, n_features):
-    #     # Per discussion https://discussions.udacity.com/t/number-of-parameters-bic-calculation/233235/15
-    #     return n_components**2 + 2 * n_components * n_features - 1
-
 
 class SelectorDIC(ModelSelector):
     ''' select best model based on Discriminative Information Criterion
@@ -195,8 +191,6 @@ class SelectorCV(ModelSelector):
                         self.X, self.lengths = combine_sequences(train_idx, self.sequences)
                         X_test, len_test  = combine_sequences(test_idx, self.sequences)
 
-                        # model = GaussianHMM(n_components=n_comp, covariance_type="diag", n_iter=1000,
-                        #                         random_state=self.random_state, verbose=False).fit(self.X, self.lengths)
                         model = self.base_model(n_comp)
                         logL = model.score(X_test, len_test)
                         cv_score_list.append(logL)
